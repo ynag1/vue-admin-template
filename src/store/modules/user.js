@@ -22,12 +22,10 @@ const actions = {
   async login(context, data) {
     // !调用api接口
     const result = await login(data) // !拿到token
-    if (result.data.success) {
-      // 表示登录接口调用成功 也就是意味着你的用户名和密码是正确的
-      // 现在有用户token
-      // actions 修改state 必须通过mutations
-      context.commit('setToken', result.data.data)
-    }
+    // 表示登录接口调用成功 也就是意味着你的用户名和密码是正确的
+    // 现在有用户token
+    // actions 修改state 必须通过mutations
+    context.commit('setToken', result)
   }
 }
 export default {

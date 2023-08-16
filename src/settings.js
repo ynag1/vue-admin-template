@@ -3,7 +3,7 @@ module.exports = {
    * @type {项目名称} title
    * @description Whether fix the header
    */
-  title: '人力资源管理',
+  title: '人力资源管理平台',
 
   /**
    * @type {头部固定} true | false

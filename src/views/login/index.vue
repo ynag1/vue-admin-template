@@ -64,7 +64,7 @@
 
       <div class="tips">
         <span style="margin-right: 20px">账号: 13800000002</span>
-        <span> 密码: 123456</span>
+        <span> 密码: 888itcast.CN764%...</span>
       </div>
     </el-form>
   </div>
@@ -73,11 +73,12 @@
 <script>
 /* eslint-disable */
 import { validMobile } from '@/utils/validate'
+import { mapActions } from 'vuex'  // 引入vuex的辅助函数
 
 export default {
   name: 'Login',
   data () {
-    const validatemobile = (rule, value, callback) => {
+    const validateMobile = (rule, value, callback) => {
       // if (!validUsername(value)) {
       //   callback(new Error('Please enter the correct user name'))
       // } else {
@@ -88,12 +89,12 @@ export default {
     return {
       loginForm: {
         mobile: '13800000002',
-        password: '123456'
+        password: '888itcast.CN764%...'
       },
       loginRules: {
-        mobile: [{ required: true, trigger: 'blur', message: "手机号不能为空" }, { validator: validatemobile, trigger: 'blur' }],
+        mobile: [{ required: true, trigger: 'blur', message: "手机号不能为空" }, { validator: validateMobile, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur', message: '密码不能为空' }, {
-          min: 6, max: 16, message: '密码的长度在6-16位之间 ', trigger: 'blur'
+          min: 6, max: 30, message: '密码的长度在6-30位之间 ', trigger: 'blur'
         }]
       },
       loading: false,
@@ -110,6 +111,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['user/login']),
     showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -121,18 +123,22 @@ export default {
       })
     },
     handleLogin () {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
+      this.$refs.loginForm.validate(async isOK => {
+        if (isOK) {
+          try {
+            this.loading = true
+            // 只有校验通过了 我们才去调用action
+            await this['user/login'](this.loginForm)
+            // 应该登录成功之后
+            // async标记的函数实际上一个promise对象
+            // await下面的代码 都是成功执行的代码
+            this.$router.push('/')
+          } catch (error) {
+            console.log(error)
+          } finally {
+            //  不论执行try 还是catch  都去关闭转圈
             this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
+          }
         }
       })
     }
