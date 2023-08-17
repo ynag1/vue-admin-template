@@ -11,7 +11,8 @@ export default {
     path: '',
     component: () => import ('@/views/salarys'),
     meta: {
-      title: '工资'//! 左侧导航的显示菜单
+      title: '工资', //! 左侧导航的显示菜单
+      icon: 'dashboard'
     }
   }]
 }

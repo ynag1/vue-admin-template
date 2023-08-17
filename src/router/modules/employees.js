@@ -11,7 +11,8 @@ export default {
     path: '',
     component: () => import ('@/views/employees'),
     meta: {
-      title: '员工管理'//! 左侧导航的显示菜单
+      title: '员工管理', //! 左侧导航的显示菜单
+      icon: 'dashboard'
     }
   }]
 }

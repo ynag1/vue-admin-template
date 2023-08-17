@@ -10,8 +10,7 @@ export default {
     // !二级路由path为空的时候此时表示二级路由的默认路由
     path: '',
     component: () => import ('@/views/approvals'),
-    meta: {
-      title: '审批'//! 左侧导航的显示菜单
-    }
+    //! 左侧导航的显示菜单
+    meta: { title: '审批', icon: 'dashboard' }
   }]
 }

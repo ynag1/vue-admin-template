@@ -11,7 +11,8 @@ export default {
     path: '',
     component: () => import ('@/views/social'),
     meta: {
-      title: '社保'//! 左侧导航的显示菜单
+      title: '社保', //! 左侧导航的显示菜单
+      icon: 'dashboard'
     }
   }]
 }

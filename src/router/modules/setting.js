@@ -11,7 +11,8 @@ export default {
     path: '',
     component: () => import ('@/views/setting'),
     meta: {
-      title: '公司设置'//! 左侧导航的显示菜单
+      title: '公司设置', //! 左侧导航的显示菜单
+      icon: 'dashboard'
     }
   }]
 }

@@ -1,5 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// 引入多个模块的规则
+import departmentsRouter from './modules/departments'//! 组织架构
+import employeesRouter from './modules/employees'//! 员工
+import settingRouter from './modules/setting'//! 公司设置
+import permissionRouter from './modules/permission'//! 权限管理
+import socialRouter from './modules/social'//! 社保
+import attendancesRouter from './modules/attendances'//! 考勤
+import salarysRouter from './modules/salarys'//! 工资
+import approvalsRouter from './modules/approvals'//! 审批
 
 Vue.use(Router)
 
@@ -59,11 +68,20 @@ export const constantRoutes = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
-
+export const asyncRoutes = [
+  approvalsRouter,
+  departmentsRouter,
+  employeesRouter,
+  permissionRouter,
+  attendancesRouter,
+  salarysRouter,
+  settingRouter,
+  socialRouter
+]
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
+  routes: [...constantRoutes, ...asyncRoutes]
 })
 
 const router = createRouter()
