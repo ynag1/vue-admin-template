@@ -12,7 +12,7 @@ export default {
     component: () => import ('@/views/salarys'),
     meta: {
       title: '工资', //! 左侧导航的显示菜单
-      icon: 'dashboard'
+      icon: 'money'
     }
   }]
 }

@@ -12,7 +12,7 @@ export default {
     component: () => import ('@/views/permission'),
     meta: {
       title: '权限管理', //! 左侧导航的显示菜单
-      icon: 'dashboard'
+      icon: 'lock'
     }
   }]
 }

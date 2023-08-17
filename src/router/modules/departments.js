@@ -12,7 +12,7 @@ export default {
     component: () => import ('@/views/departments'),
     meta: {
       title: '组织架构', //! 左侧导航的显示菜单
-      icon: 'dashboard'
+      icon: 'tree'
     }
   }]
 }

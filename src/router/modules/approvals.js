@@ -11,6 +11,6 @@ export default {
     path: '',
     component: () => import ('@/views/approvals'),
     //! 左侧导航的显示菜单
-    meta: { title: '审批', icon: 'dashboard' }
+    meta: { title: '审批', icon: 'tree-table' }
   }]
 }
