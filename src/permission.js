@@ -9,10 +9,12 @@ const whiteList = ['/login', '/404'] //! 定义白名单  所有不受权限控�
 router.beforeEach(async(to, from, next) => {
   NProgress.start() // ?开启进度条
   if (store.getters.token) {
+    // ?有token的时候才能获取资料
     // ?如果有/login就跳转到主页
     if (to.path === '/login') {
       next('/') // ? 跳转到主页
     } else {
+      // ?只有放行的时候才回去获取资料，如果当前vuex中有用户id表示以及有资料不需要获取，没有id才去获取
       if (!store.getters.userId) {
         // ? 如果没有id才表示当前用户资料还没有获取过
         await store.dispatch('user/getUserInfo')

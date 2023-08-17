@@ -23,6 +23,13 @@ export function getUserInfo() {
     method: 'post'
   })
 }
-
-export function logout() {
+/**
+ *
+ * @param {根据用户id获取用户详情} id
+ * @returns{return request默认请求类型就是get}
+ */
+export function getUserDetailById(id) {
+  return request({
+    url: `/sys/user/${id}`
+  })
 }

@@ -1,9 +1,9 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login, getUserInfo } from '@/api/user'
+import { login, getUserInfo, getUserDetailById } from '@/api/user'
 // 状态
 const state = {
   token: getToken(), //! 设置token的共享状态,初始化vuex的时候先重缓存中读取
-  getUserInfo: {}
+  uerInfo: {}
 }
 // 修改状态
 const mutations = {
@@ -18,8 +18,10 @@ const mutations = {
     removeToken() //! 先清除 vuex  再清除缓存 vuex和 缓存数据的同步
   },
   // !设置用户信息
-  setUserInfo(state, uerInfo) {
-    state.uerInfo = { ...uerInfo }
+  setUserInfo(state, result) {
+    // 更新一个对象 都是响应式的
+    state.uerInfo = result
+    // state.uerInfo = { ...result }
   },
   // !删除用户信息
   reomveUserInfo(state) {
@@ -44,7 +46,10 @@ const actions = {
    */
   async getUserInfo(context) {
     const result = await getUserInfo()
-    context.commit('setUserInfo', result) // 将整个的个人信息设置到用户的vuex数据中
+    // !获取用户基本详情,获取用户头像
+    const baseInfo = await getUserDetailById(result.userId)
+    // const obj = { ...baseInfo, ...result }//! 合并数据
+    context.commit('setUserInfo', { ...baseInfo, ...result }) // 将整个的个人信息设置到用户的vuex数据中
     return result // 这里为什么要返回 为后面埋下伏笔
   }
 }
