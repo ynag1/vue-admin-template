@@ -62,9 +62,11 @@ export default {
     toggleSideBar () {
       this.$store.dispatch('app/toggleSideBar')
     },
+    //退出登录
     async logout () {
-      await this.$store.dispatch('sys/login')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      // await 写不写退出登录都是同步的
+      await this.$store.dispatch('user/logout')
+      this.$router.push(`/login`)//跳到登录页
     }
   }
 }
