@@ -47,7 +47,14 @@ service.interceptors.response.use(
       return Promise.reject(new Error(message))
     }
   }, error => {
-    Message.error(error.message) // 提示错误信息
+    // !被动一处理token
+    if (error.response && error.response.data && error.response.data.code === 10002) {
+      // !=1002表示后端告诉我token超时
+      store.dispatch('user/logut')//! 登录action 删除token
+      router.push('/login')
+    } else {
+      Message.error(error.message) // 提示错误信息
+    }
     return Promise.reject(error) // 返回执行错误 让当前的执行链跳出成功 直接进入 catch
   }
 )
